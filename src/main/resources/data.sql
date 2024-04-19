@@ -1,0 +1,4 @@
+CREATE TABLE users (
+    userId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
