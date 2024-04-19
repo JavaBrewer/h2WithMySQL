@@ -4,7 +4,7 @@ spring:
       on-profile: test
 
   datasource:
-    url: jdbc:h2:mem:test;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    url: jdbc:h2:mem:test;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
     driver-class-name: org.h2.Driver
     username: sa
     password: 1234
@@ -19,17 +19,19 @@ spring:
       mode: ALWAYS
 
   jpa:
+    # h2에서 MySQL MODE 이용을 위한 방언 설정
     database-platform: org.hibernate.dialect.MySQLDialect
+    generate-ddl: true
     hibernate:
-      ddl-auto: update
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create-drop
+    # hibernate 초기화 전 sql 초기화가 먼저 실행되도록 함
     defer-datasource-initialization: true
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+        # 테이블 자동 생성시 테이블명과 컬럼명을 `로 감싸 키워드나 예약어 등과의 충돌 방지
+        globally_quoted_identifiers: true
 
 
 
