@@ -2,6 +2,7 @@ package com.example.demoh2.domain.entity;
 
 import com.example.demoh2.domain.dto.UserRequest;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class UserEntity {
     @Id
@@ -35,7 +36,8 @@ public class UserEntity {
                 .build();
     }
 
-    public void addPost(PostEntity post) {
-
+    public void add(PostEntity post) {
+        postList.add(post);
+        post.setUser(this);
     }
 }

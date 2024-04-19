@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class UserRequest {
-    private String name;
+public class PostRequest {
+    private String title;
+    private String contents;
+
+
 }
